@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Be My Valentine 💘</title>
+    <title>Cinematic Valentine 💘</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,21 +11,25 @@
     <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
-    <h1 id="typing"></h1>
+<div class="vignette"></div>
 
-    <div class="buttons">
-        <button id="yesBtn">YES 💖</button>
-        <button id="noBtn">NO 😢</button>
+<div class="scene">
+    <h1 id="text"></h1>
+
+    <div id="proposal" class="hidden">
+        <h2>Will you be my Valentine? 💘</h2>
+        <div class="buttons">
+            <button id="yesBtn">YES ❤️</button>
+            <button id="noBtn">NO 💔</button>
+        </div>
     </div>
 
-    <div id="result" class="hidden">
-        <h2>She said YES 💍🥹</h2>
-        <p>And my heart found its forever 💘</p>
+    <div id="final" class="hidden">
+        <h1>She said YES 💍</h1>
+        <p>And suddenly… everything made sense.</p>
     </div>
 </div>
 
-<canvas id="fireworks"></canvas>
 <div class="hearts"></div>
 
 <script src="script.js"></script>
