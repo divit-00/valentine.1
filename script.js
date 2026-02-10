@@ -1,82 +1,85 @@
-// Typing effect
-const text = "Will you be my Valentine? Meher💘";
-let index = 0;
-const typingEl = document.getElementById("typing");
-
-function typeText() {
-    if (index < text.length) {
-        typingEl.textContent += text.charAt(index);
-        index++;
-        setTimeout(typeText, 80);
-    }
-}
-typeText();
-
-// Elements
+const textEl = document.getElementById("text");
+const proposal = document.getElementById("proposal");
+const finalScene = document.getElementById("final");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const result = document.getElementById("result");
-const buttons = document.querySelector(".buttons");
-const music = document.getElementById("music");
 const heartsBox = document.querySelector(".hearts");
+const music = document.getElementById("music");
 
-// YES grows
 let yesScale = 1;
 
-// YES clicked 💍
-yesBtn.addEventListener("click", () => {
-    buttons.style.display = "none";
-    result.classList.remove("hidden");
-    typingEl.textContent = "Forever starts today 💖";
+// Story lines (cinematic pacing)
+const story = [
+    "Some people enter your life without warning…",
+    "And suddenly, silence feels softer.",
+    "Every smile feels familiar.",
+    "Every moment feels important."
+];
 
+let line = 0;
+let char = 0;
+
+function typeStory() {
+    if (char < story[line].length) {
+        textEl.textContent += story[line].charAt(char);
+        char++;
+        setTimeout(typeStory, 75);
+    } else {
+        setTimeout(() => {
+            char = 0;
+            line++;
+            if (line < story.length) {
+                textEl.textContent = "";
+                typeStory();
+            } else {
+                setTimeout(showProposal, 1400);
+            }
+        }, 1200);
+    }
+}
+
+typeStory();
+
+// Show proposal
+function showProposal() {
+    textEl.classList.add("hidden");
+    proposal.classList.remove("hidden");
+}
+
+// YES 💍
+yesBtn.addEventListener("click", () => {
+    proposal.classList.add("hidden");
+    finalScene.classList.remove("hidden");
+
+    music.currentTime = 37; // cinematic drop
     music.play();
+
     startHearts();
-    startFireworks();
 });
 
-// NO clicked 😈
+// NO 😈 → YES grows
 noBtn.addEventListener("click", () => {
-    yesScale += 0.25;
+    yesScale += 0.35;
     yesBtn.style.transform = `scale(${yesScale})`;
     moveNo();
 });
 
-// NO hover escape
 noBtn.addEventListener("mouseover", moveNo);
 
 function moveNo() {
-    const x = Math.random() * 300 - 150;
-    const y = Math.random() * 200 - 100;
+    const x = Math.random() * 320 - 160;
+    const y = Math.random() * 220 - 110;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-// Hearts animation 💖
+// Hearts forever 💖
 function startHearts() {
     setInterval(() => {
         const heart = document.createElement("span");
         heart.innerHTML = "❤️";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (18 + Math.random() * 14) + "px";
+        heart.style.fontSize = (18 + Math.random() * 16) + "px";
         heartsBox.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-    }, 200);
-}
-
-// Fireworks 🎆
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-function startFireworks() {
-    setInterval(() => {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height / 2;
-        for (let i = 0; i < 40; i++) {
-            ctx.beginPath();
-            ctx.arc(x, y, 2, 0, Math.PI * 2);
-            ctx.fillStyle = `hsl(${Math.random()*360},100%,60%)`;
-            ctx.fill();
-        }
-    }, 400);
+        setTimeout(() => heart.remove(), 6000);
+    }, 220);
 }
