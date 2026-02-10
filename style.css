@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle, #ff4d6d, #ff8fab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    background: rgba(255,255,255,0.15);
+    padding: 40px 55px;
+    border-radius: 30px;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(12px);
+    z-index: 3;
+}
+
+h1 {
+    font-size: 2.7rem;
+    min-height: 80px;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #2ecc71;
+    color: white;
+}
+
+#noBtn {
+    background: #e74c3c;
+    color: white;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+#result {
+    margin-top: 30px;
+    animation: pop 1s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Hearts */
+.hearts span {
+    position: absolute;
+    bottom: -20px;
+    font-size: 24px;
+    animation: rise 5s linear forwards;
+}
+
+@keyframes rise {
+    to {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* Fireworks canvas */
+#fireworks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
